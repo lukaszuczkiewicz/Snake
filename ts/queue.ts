@@ -1,12 +1,4 @@
-export class Node {
-  value: any;
-  next: any;
-  
-  constructor(value: any){
-      this.value = value;
-      this.next = null;
-  }
-}
+import { Node } from "./node";
 
 export class Queue {
   first: any;
