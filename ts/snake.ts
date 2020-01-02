@@ -11,10 +11,13 @@ export class Snake extends Queue {
     this.changeDirection([0, 1]);
   }
 
-  draw() {
-    this.first.value.draw();
-    this.first.next.value.draw();
-    this.first.next.next.value.draw();
+  draw(): void {
+    let current = this.first;
+
+    while (current !== null) {
+      current.value.draw();
+      current = current.next;
+    }
   }
 
   checkCollision() {
