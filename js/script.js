@@ -14,12 +14,6 @@ function initGame() {
     apple = new Apple(10, 10);
     apple.draw();
 }
-// setInterval(() => {
-//   drawBg();
-//   snake.move();
-//   snake.draw();
-//   console.log('time');
-// }, 500);
 initGame();
 const timeInterval = 100;
 let timeCounter = 0;
@@ -41,3 +35,25 @@ function mainLoop(time = 0) {
     requestAnimationFrame(mainLoop);
 }
 mainLoop();
+document.addEventListener('keydown', e => {
+    //left
+    if (e.keyCode === 37 && snake.direction[0] === 0) {
+        snake.direction = [-1, 0];
+        // snake.blockXChange = true;
+        //right
+    }
+    else if (e.keyCode === 39 && snake.direction[0] === 0) {
+        snake.direction = [1, 0];
+        // snake.blockXChange = true;
+        //up
+    }
+    else if (e.keyCode === 38 && snake.direction[1] === 0) {
+        snake.direction = [0, -1];
+        // snake.blockYChange = true;
+        //down
+    }
+    else if (e.keyCode === 40 && snake.direction[1] === 0) {
+        snake.direction = [0, 1];
+        // player1.blockYChange = true;
+    }
+});
