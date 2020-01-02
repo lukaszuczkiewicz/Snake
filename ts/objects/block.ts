@@ -1,6 +1,7 @@
-import { ctx } from "./script.js";
+import { ctx } from "../script.js";
+import { IDrawable } from "../IDrawable.js";
 
-export class Block {
+export class Block implements IDrawable{
   x: number;
   y: number;
   size = 40;

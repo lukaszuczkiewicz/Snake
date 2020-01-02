@@ -1,6 +1,6 @@
-import { Queue } from './queue.js';
+import { Queue } from '../data structures/queue.js';
 import { SnakePart } from './snakePart.js';
-import { gridWidth, gridHeight } from './script.js';
+import { gridWidth, gridHeight } from '../script.js';
 
 export class Snake extends Queue<SnakePart> {
   direction: [number, number];

@@ -1,6 +1,6 @@
-import { Apple } from './apple.js';
-import { Background } from './background.js';
-import { Snake } from './snake.js';
+import { Apple } from './objects/apple.js';
+import { Background } from './objects/background.js';
+import { Snake } from './objects/snake.js';
 
 export const cvs: any = document.getElementById('canvas');
 export const ctx = cvs.getContext('2d');

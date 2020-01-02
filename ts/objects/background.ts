@@ -1,5 +1,5 @@
-import { ctx, cvs } from "./script.js";
-import { IDrawable } from "./IDrawable.js";
+import { ctx, cvs } from "../script.js";
+import { IDrawable } from "../IDrawable.js";
 
 export class Background implements IDrawable {
   color: string = 'black';
