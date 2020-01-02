@@ -8,13 +8,21 @@ function drawBg() {
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, cvs.width, cvs.height);
 }
-drawBg();
+function drawScore() {
+    ctx.font = `40px Calibri`;
+    ctx.textAlign = "left";
+    ctx.fillStyle = "white";
+    ctx.fillText(`Score: ${snake.score}`, 40, 40);
+}
+;
 let snake, apple;
 function initGame() {
+    drawBg();
     snake = new Snake();
     snake.draw();
     apple = new Apple(10, 10);
     apple.draw();
+    drawScore();
 }
 initGame();
 const timeInterval = 100;
@@ -27,11 +35,10 @@ function mainLoop(time = 0) {
     if (timeCounter > timeInterval) {
         timeCounter = 0;
         snake.move();
-        // snake.eat();
         drawBg();
         apple.draw();
         snake.draw();
-        // drawScore();
+        drawScore();
     }
     requestAnimationFrame(mainLoop);
 }

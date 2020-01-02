@@ -4,6 +4,8 @@ import { gridWidth, gridHeight } from './script.js';
 
 export class Snake extends Queue<SnakePart> {
   direction: [number, number];
+  score: number = 0;
+  
   constructor() {
     super();
     this.enqueue(new SnakePart(8, 3));
@@ -36,7 +38,9 @@ export class Snake extends Queue<SnakePart> {
 
     //snake's body
 
+
     //apple
+
 
   }
 

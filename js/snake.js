@@ -4,6 +4,7 @@ import { gridWidth, gridHeight } from './script.js';
 export class Snake extends Queue {
     constructor() {
         super();
+        this.score = 0;
         this.enqueue(new SnakePart(8, 3));
         this.enqueue(new SnakePart(8, 4));
         this.enqueue(new SnakePart(8, 5));
