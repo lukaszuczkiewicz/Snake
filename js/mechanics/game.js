@@ -16,6 +16,7 @@ export function initGame() {
     score = new Score();
     score.draw();
 }
+let isPaused = false;
 const timeInterval = 100;
 let timeCounter = 0;
 let lastTime = 0;
@@ -23,7 +24,7 @@ export function mainLoop(time = 0) {
     const deltaTime = time - lastTime;
     lastTime = time;
     timeCounter += deltaTime;
-    if (timeCounter > timeInterval) {
+    if (timeCounter > timeInterval && !isPaused) {
         timeCounter = 0;
         snake.move();
         background.draw();
@@ -37,6 +38,11 @@ export function enableControls() {
     //controls
     document.addEventListener('keydown', e => {
         //left
+        if (e.keyCode === 32) { //spacebar
+            isPaused = !isPaused;
+        }
+        if (isPaused)
+            return;
         if ((e.keyCode === 37 || e.keyCode === 65) &&
             snake.direction[0] === 0) {
             snake.direction = [-1, 0];

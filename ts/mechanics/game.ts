@@ -20,6 +20,7 @@ import { Score } from '../score.js';
     score.draw();
   }
 
+  let isPaused = false;
   const timeInterval = 100;
   let timeCounter = 0;
   let lastTime = 0;
@@ -29,7 +30,7 @@ import { Score } from '../score.js';
     lastTime = time;
     timeCounter += deltaTime;
 
-    if (timeCounter > timeInterval) {
+    if (timeCounter > timeInterval && !isPaused) {
       timeCounter = 0;
 
       snake.move();
@@ -45,6 +46,11 @@ import { Score } from '../score.js';
     //controls
     document.addEventListener('keydown', e => {
       //left
+      if (e.keyCode === 32) { //spacebar
+        isPaused = !isPaused;
+      }
+      if (isPaused) return;
+
       if (
         (e.keyCode === 37 || e.keyCode === 65) &&
         snake.direction[0] === 0
