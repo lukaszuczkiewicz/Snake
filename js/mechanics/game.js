@@ -14,7 +14,7 @@ export function initGame() {
     apple = new Apple(10, 10);
     apple.draw();
     score = new Score();
-    score.draw();
+    score.draw(snake.score);
 }
 let isPaused = false;
 const timeInterval = 100;
@@ -30,21 +30,21 @@ export function mainLoop(time = 0) {
         background.draw();
         apple.draw();
         snake.draw();
-        score.draw();
+        score.draw(snake.score);
     }
     requestAnimationFrame(mainLoop);
 }
 export function enableControls() {
     //controls
     document.addEventListener('keydown', e => {
-        //left
-        if (e.keyCode === 32) { //spacebar
+        if (e.keyCode === 32) {
+            //spacebar
             isPaused = !isPaused;
         }
         if (isPaused)
             return;
-        if ((e.keyCode === 37 || e.keyCode === 65) &&
-            snake.direction[0] === 0) {
+        //left
+        if ((e.keyCode === 37 || e.keyCode === 65) && snake.direction[0] === 0) {
             snake.direction = [-1, 0];
             //right
         }

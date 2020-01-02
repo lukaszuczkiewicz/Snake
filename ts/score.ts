@@ -1,12 +1,13 @@
 import { IDrawable } from "./IDrawable.js";
+import { ctx } from "./mechanics/canvas.js";
 
 export class Score implements IDrawable{
-  color: string = 'white';
+  color: string = 'yellow';
   
-  draw(): void {
-    // ctx.font = `40px Calibri`;
-    // ctx.textAlign = "left";
-    // ctx.fillStyle = this.co;
-    // ctx.fillText(`Score: ${snake.score}`, 40, 40);
+  draw(text: any): void {
+    ctx.font = `40px Calibri`;
+    ctx.textAlign = "left";
+    ctx.fillStyle = this.color;
+    ctx.fillText(`Score: ${text}`, 40, 40);
   }
 }
