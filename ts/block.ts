@@ -11,7 +11,7 @@ export class Block {
     this.y = y;
   }
 
-  draw() {
+  draw(): void {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
   }

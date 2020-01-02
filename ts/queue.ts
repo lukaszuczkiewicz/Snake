@@ -11,7 +11,7 @@ export class Queue<T> {
   }
   enqueue(val: T): number{
       var newNode: Node<T> = new Node(val);
-      if(!this.first){
+      if (!this.first){
           this.first = newNode;
           this.last = newNode;
       } else {

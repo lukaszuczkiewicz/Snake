@@ -1,8 +1,9 @@
-import { Queue } from "./queue.js";
-import { SnakePart } from "./snakePart.js";
+import { Queue } from './queue.js';
+import { SnakePart } from './snakePart.js';
+import { gridWidth, gridHeight } from './script.js';
 
 export class Snake extends Queue<SnakePart> {
-  direction: [number, number]
+  direction: [number, number];
   constructor() {
     super();
     this.enqueue(new SnakePart(8, 3));
@@ -21,11 +22,32 @@ export class Snake extends Queue<SnakePart> {
   }
 
   checkCollision() {
-    // to implement
+    //borders
+    if (this.last.value.x < 0) {
+      this.last.value.x = gridWidth - 1;
+    } else if (this.last.value.x > gridWidth - 1) {
+      this.last.value.x = 0;
+    }
+    if (this.last.value.y < 0) {
+      this.last.value.y = gridHeight - 1;
+    } else if (this.last.value.y > gridHeight - 1) {
+      this.last.value.y = 0;
+    }
+
+    //snake's body
+
+    //apple
+
   }
 
   move() {
-    this.enqueue(new SnakePart(this.last.value.x + this.direction[0], this.last.value.y + this.direction[1],));
+    this.checkCollision();
+    this.enqueue(
+      new SnakePart(
+        this.last.value.x + this.direction[0],
+        this.last.value.y + this.direction[1]
+      )
+    );
     this.dequeue();
   }
 
