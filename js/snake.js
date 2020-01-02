@@ -3,9 +3,9 @@ import { SnakePart } from "./snakePart.js";
 export class Snake extends Queue {
     constructor() {
         super();
-        this.enqueue(new SnakePart(3, 3));
-        this.enqueue(new SnakePart(3, 4));
-        this.enqueue(new SnakePart(3, 5));
+        this.enqueue(new SnakePart(3, 10));
+        this.enqueue(new SnakePart(3, 9));
+        this.enqueue(new SnakePart(3, 8));
         this.changeDirection([0, 1]);
     }
     draw() {
@@ -19,7 +19,8 @@ export class Snake extends Queue {
         // to implement
     }
     move() {
-        // to implement
+        this.enqueue(new SnakePart(this.last.value.x - this.direction[0], this.last.value.y - this.direction[1]));
+        this.dequeue();
     }
     changeDirection(direction) {
         this.direction = direction;
