@@ -1,13 +1,10 @@
-import { Snake } from './snake.js';
 import { Apple } from './apple.js';
+import { Background } from './background.js';
+import { Snake } from './snake.js';
 export const cvs = document.getElementById('canvas');
 export const ctx = cvs.getContext('2d');
 export const gridWidth = 32;
 export const gridHeight = 18;
-function drawBg() {
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, cvs.width, cvs.height);
-}
 function drawScore() {
     ctx.font = `40px Calibri`;
     ctx.textAlign = "left";
@@ -15,9 +12,10 @@ function drawScore() {
     ctx.fillText(`Score: ${snake.score}`, 40, 40);
 }
 ;
-let snake, apple;
+let background, snake, apple;
 function initGame() {
-    drawBg();
+    background = new Background();
+    background.draw();
     snake = new Snake();
     snake.draw();
     apple = new Apple(10, 10);
@@ -35,7 +33,7 @@ function mainLoop(time = 0) {
     if (timeCounter > timeInterval) {
         timeCounter = 0;
         snake.move();
-        drawBg();
+        background.draw();
         apple.draw();
         snake.draw();
         drawScore();

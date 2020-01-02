@@ -5,7 +5,7 @@ import { gridWidth, gridHeight } from './script.js';
 export class Snake extends Queue<SnakePart> {
   direction: [number, number];
   score: number = 0;
-  
+
   constructor() {
     super();
     this.enqueue(new SnakePart(8, 3));
@@ -37,11 +37,24 @@ export class Snake extends Queue<SnakePart> {
     }
 
     //snake's body
+    let current = this.first;
+    while (current.next !== null) {
+      if (current.value.x === this.last.value.x && current.value.y === this.last.value.y) {
+        this.score = 123456;
+        return;
+      }
+      current = current.next;
+    }
+    // if (this.pos.x[0] === fruit.pos.x && this.pos.y[0] === fruit.pos.y) {
+    //   // extend body
+    //   this.pos.x.push(this.pos.x[length - 1]);
+    //   this.pos.y.push(this.pos.y[length - 1]);
 
+    //   newFruitPos();
+    //   this.score++;
+    // }
 
     //apple
-
-
   }
 
   move() {
