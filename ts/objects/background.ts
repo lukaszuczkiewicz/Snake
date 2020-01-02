@@ -1,4 +1,4 @@
-import { ctx, cvs } from "../script.js";
+import { ctx, cvs } from "../mechanics/canvas.js";
 import { IDrawable } from "../IDrawable.js";
 
 export class Background implements IDrawable {

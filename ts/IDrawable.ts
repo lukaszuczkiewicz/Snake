@@ -1,4 +1,4 @@
 export interface IDrawable {
   color: string;
-  draw(): void;
+  draw(value?: number): void;
 }

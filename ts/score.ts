@@ -1,4 +1,4 @@
-import { IDrawable } from "./IDrawable";
+import { IDrawable } from "./IDrawable.js";
 
 export class Score implements IDrawable{
   color: string = 'white';
