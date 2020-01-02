@@ -1,13 +1,31 @@
 import { Queue } from "./queue.js";
-import { Block } from "./block.js";
+import { SnakePart } from "./snakePart.js";
 
 export class Snake extends Queue {
-  constructor(x: number, y: number, direction: [number, number]) {
+  private direction: [number, number];
+  constructor() {
     super();
-    this.enqueue(new Block(3, 3));
+    this.enqueue(new SnakePart(3, 3));
+    this.enqueue(new SnakePart(3, 4));
+    this.enqueue(new SnakePart(3, 5));
+    this.changeDirection([0, 1]);
   }
 
   draw() {
     this.first.value.draw();
+    this.first.next.value.draw();
+    this.first.next.next.value.draw();
+  }
+
+  checkCollision() {
+    // to implement
+  }
+
+  move() {
+    // to implement
+  }
+
+  changeDirection(direction: [number, number]) {
+    this.direction = direction;
   }
 }

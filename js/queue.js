@@ -28,4 +28,7 @@ export class Queue {
         this.size--;
         return temp.value;
     }
+    traverse() {
+        // to implement
+    }
 }

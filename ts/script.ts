@@ -15,7 +15,7 @@ drawBg();
 
 
 function initGame() {
-  let snake = new Snake(3, 3, [0, 1]);
+  let snake = new Snake();
   snake.draw();
 };
 
