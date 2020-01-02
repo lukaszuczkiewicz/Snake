@@ -45,6 +45,8 @@ export class Snake extends Queue<SnakePart> {
       }
       current = current.next;
     }
+    
+    //apple
     // if (this.pos.x[0] === fruit.pos.x && this.pos.y[0] === fruit.pos.y) {
     //   // extend body
     //   this.pos.x.push(this.pos.x[length - 1]);
@@ -54,7 +56,6 @@ export class Snake extends Queue<SnakePart> {
     //   this.score++;
     // }
 
-    //apple
   }
 
   move() {
