@@ -49,19 +49,19 @@ mainLoop();
 
 document.addEventListener('keydown', e => {
     //left
-    if (e.keyCode === 37 && snake.direction[0] === 0) {
+    if ((e.keyCode === 37 || e.keyCode === 65) && snake.direction[0] === 0) {
       snake.direction = [-1, 0];
       // snake.blockXChange = true;
       //right
-    } else if (e.keyCode === 39 && snake.direction[0] === 0) {
+    } else if ((e.keyCode === 39 || e.keyCode === 68) && snake.direction[0] === 0) {
       snake.direction = [1, 0];
       // snake.blockXChange = true;
       //up
-    } else if (e.keyCode === 38 && snake.direction[1] === 0) {
+    } else if ((e.keyCode === 38 || e.keyCode === 87) && snake.direction[1] === 0) {
       snake.direction = [0, -1];
       // snake.blockYChange = true;
       //down
-    } else if (e.keyCode === 40 && snake.direction[1] === 0) {
+    } else if ((e.keyCode === 40 || e.keyCode === 83) && snake.direction[1] === 0) {
       snake.direction = [0, 1];
       // player1.blockYChange = true;
     }
