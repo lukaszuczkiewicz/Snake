@@ -1,6 +1,6 @@
-export class Node {
-  value: any;
-  next: any;
+export class Node<T> {
+  value: T;
+  next: Node<T>;
   
   constructor(value: any){
       this.value = value;

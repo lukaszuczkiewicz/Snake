@@ -14,9 +14,6 @@ export class Snake extends Queue {
             current.value.draw();
             current = current.next;
         }
-        // this.first.value.draw();
-        // this.first.next.value.draw();
-        // this.first.next.next.value.draw();
     }
     checkCollision() {
         // to implement

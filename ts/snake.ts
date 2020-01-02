@@ -1,7 +1,7 @@
 import { Queue } from "./queue.js";
 import { SnakePart } from "./snakePart.js";
 
-export class Snake extends Queue {
+export class Snake extends Queue<SnakePart> {
   private direction: [number, number];
   constructor() {
     super();

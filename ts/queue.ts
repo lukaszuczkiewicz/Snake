@@ -1,16 +1,16 @@
 import { Node } from "./node.js";
 
-export class Queue {
-  first: any;
-  last: any;
+export class Queue<T> {
+  first: Node<T>;
+  last: Node<T>;
   size: number;
   constructor(){
       this.first = null;
       this.last = null;
       this.size = 0;
   }
-  enqueue(val: any): number{
-      var newNode = new Node(val);
+  enqueue(val: T): number{
+      var newNode: Node<T> = new Node(val);
       if(!this.first){
           this.first = newNode;
           this.last = newNode;
@@ -21,7 +21,7 @@ export class Queue {
       return ++this.size;
   }
 
-  dequeue(): any {
+  dequeue(): T {
       if(!this.first) return null;
 
       var temp = this.first;
@@ -31,9 +31,5 @@ export class Queue {
       this.first = this.first.next;
       this.size--;
       return temp.value;
-  }
-  
-  traverse() {
-    // to implement
   }
 }
