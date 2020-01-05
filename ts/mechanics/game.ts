@@ -32,9 +32,11 @@ export function mainLoop(time = 0) {
   if (timeCounter > timeInterval && !isPaused) {
     timeCounter = 0;
 
-    snake.move();
     background.draw();
     apple.draw();
+    snake.move();
+    snake.checkCollision();
+    snake.checkEarningPoints(apple.x, apple.y) && apple.createNewPosition(snake);
     snake.draw();
     score.draw(snake.score);
   }

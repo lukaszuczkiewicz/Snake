@@ -5,6 +5,7 @@ import { gridWidth, gridHeight } from '../mechanics/canvas.js';
 export class Snake extends Queue<SnakePart> {
   direction: [number, number];
   score: number = 0;
+  isEating = false;
 
   constructor() {
     super();
@@ -24,7 +25,7 @@ export class Snake extends Queue<SnakePart> {
   }
 
   checkCollision() {
-    //borders
+    //with borders
     if (this.last.value.x < 0) {
       this.last.value.x = gridWidth - 1;
     } else if (this.last.value.x > gridWidth - 1) {
@@ -36,40 +37,51 @@ export class Snake extends Queue<SnakePart> {
       this.last.value.y = 0;
     }
 
-    //snake's body
+    //with snake's tail
     let current = this.first;
     while (current.next !== null) {
       if (current.value.x === this.last.value.x && current.value.y === this.last.value.y) {
-        this.score = 123456;
+        //gameOver
+        this.reset();
+        this.score = 0;
         return;
       }
       current = current.next;
     }
-    
-    //apple
-    // if (this.pos.x[0] === fruit.pos.x && this.pos.y[0] === fruit.pos.y) {
-    //   // extend body
-    //   this.pos.x.push(this.pos.x[length - 1]);
-    //   this.pos.y.push(this.pos.y[length - 1]);
+  }
 
-    //   newFruitPos();
-    //   this.score++;
-    // }
-
+  checkEarningPoints(appleX: number, appleY: number): boolean {
+    if (this.last.value.x === appleX && this.last.value.y === appleY) {
+      // extend body
+      this.isEating = true;
+      this.score++;
+      return true;
+    }
+    return false;
   }
 
   move() {
-    this.checkCollision();
     this.enqueue(
       new SnakePart(
         this.last.value.x + this.direction[0],
         this.last.value.y + this.direction[1]
       )
     );
-    this.dequeue();
+    if (!this.isEating) {
+      this.dequeue(); 
+    }
+    this.isEating = false;
   }
 
   changeDirection(direction: [number, number]) {
     this.direction = direction;
+  }
+
+  reset() {
+    let current = this.first;
+    while (current.next.next.next !== null) {
+      this.dequeue();
+      current = current.next;
+    }
   }
 }
