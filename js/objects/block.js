@@ -1,10 +1,10 @@
 import { ctx } from "../mechanics/canvas.js";
 export class Block {
-    constructor(x, y) {
+    constructor(x, y, color) {
         this.size = 40;
-        this.color = 'white';
         this.x = x;
         this.y = y;
+        this.color = color;
     }
     draw() {
         ctx.fillStyle = this.color;

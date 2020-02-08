@@ -4,8 +4,9 @@ import { gridWidth, gridHeight } from "../mechanics/canvas.js";
 import { Color } from "../enums/color.js";
 
 export class Apple extends Block {
-  color = Color.red;
-  
+  constructor(x: number, y: number) {
+    super(x, y, Color.red);
+  }
   createNewPosition(snake: Snake) {
     this.x = Math.floor(Math.random() * gridWidth);
     this.y = Math.floor(Math.random() * gridHeight);

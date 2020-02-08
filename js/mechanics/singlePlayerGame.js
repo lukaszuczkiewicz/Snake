@@ -4,6 +4,7 @@ import { Apple } from '../objects/apple.js';
 import { Score } from '../objects/score.js';
 import { DOM } from '../DOM.js';
 import { KeyCode } from '../enums/keyCode.js';
+import { Direction } from '../enums/direction.js';
 export class SiglePlayerGame {
     constructor() {
         this.isPaused = false;
@@ -45,34 +46,28 @@ export class SiglePlayerGame {
         this.mainLoop = null;
     }
     enableControls() {
-        //controls
         document.addEventListener('keydown', e => {
-            if (e.keyCode === 32) {
-                //spacebar
+            if (e.keyCode === KeyCode.space) {
                 DOM.toggleMenu();
                 this.isPaused = !this.isPaused;
             }
             if (this.isPaused)
                 return;
-            //left
             if ((e.keyCode === KeyCode.a || e.keyCode === KeyCode.left) &&
                 this.snake.direction[0] === 0) {
-                this.snake.direction = [-1, 0];
-                //right
+                this.snake.direction = Direction.left;
             }
             else if ((e.keyCode === KeyCode.d || e.keyCode === KeyCode.right) &&
                 this.snake.direction[0] === 0) {
-                this.snake.direction = [1, 0];
-                //up
+                this.snake.direction = Direction.right;
             }
             else if ((e.keyCode === KeyCode.w || e.keyCode === KeyCode.up) &&
                 this.snake.direction[1] === 0) {
-                this.snake.direction = [0, -1];
-                //down
+                this.snake.direction = Direction.up;
             }
             else if ((e.keyCode === KeyCode.s || e.keyCode === KeyCode.down) &&
                 this.snake.direction[1] === 0) {
-                this.snake.direction = [0, 1];
+                this.snake.direction = Direction.down;
             }
         });
     }

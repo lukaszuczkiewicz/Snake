@@ -4,6 +4,9 @@ import { Apple } from '../objects/apple.js';
 import { Score } from '../objects/score.js';
 import { DOM } from '../DOM.js';
 import { IGame } from '../interfaces/IGame.js';
+import { KeyCode } from '../enums/keyCode.js';
+import { Direction } from '../enums/direction.js';
+import { Color } from '../enums/color.js';
 
 export class MultiPlayerGame implements IGame {
   private background: Background;
@@ -19,13 +22,13 @@ export class MultiPlayerGame implements IGame {
   public initGame() {
     this.background = new Background();
     this.background.draw();
-    this.snakes = [new Snake(), new Snake()];
+    this.snakes = [new Snake(), new Snake(Color.orange)];
     this.snakes.forEach(snake => snake.draw());
     this.apple = new Apple(10, 10);
     this.apple.createNewPosition(this.snakes[0]);
     this.apple.draw();
     this.score = new Score();
-    this.score.draw(this.snakes[0].score);
+    this.score.draw(this.snakes[0].score);      
 
     this.enableControls();
     this.mainLoop();
@@ -58,7 +61,7 @@ export class MultiPlayerGame implements IGame {
   enableControls() {
     //controls
     document.addEventListener('keydown', e => {
-      if (e.keyCode === 32) {
+      if (e.keyCode === KeyCode.space) {
         //spacebar
         DOM.toggleMenu();
         this.isPaused = !this.isPaused;
@@ -68,54 +71,54 @@ export class MultiPlayerGame implements IGame {
       //PLAYER 1
       //left
       if (
-        (e.keyCode === 37) &&
+        (e.keyCode === KeyCode.a) &&
         this.snakes[0].direction[0] === 0
       ) {
-        this.snakes[0].direction = [-1, 0];
+        this.snakes[0].direction = Direction.left;
         //right
       } else if (
-        (e.keyCode === 39) &&
+        (e.keyCode === KeyCode.d) &&
         this.snakes[0].direction[0] === 0
       ) {
-        this.snakes[0].direction = [1, 0];
+        this.snakes[0].direction = Direction.right;
         //up
       } else if (
-        (e.keyCode === 38) &&
+        (e.keyCode === KeyCode.w) &&
         this.snakes[0].direction[1] === 0
       ) {
-        this.snakes[0].direction = [0, -1];
+        this.snakes[0].direction = Direction.up;
         //down
       } else if (
-        (e.keyCode === 40) &&
+        (e.keyCode === KeyCode.s) &&
         this.snakes[0].direction[1] === 0
       ) {
-        this.snakes[0].direction = [0, 1];
+        this.snakes[0].direction = Direction.down;
       }
 
       //PLAYER 2
       if (
-        (e.keyCode === 65) &&
+        (e.keyCode === KeyCode.left) &&
         this.snakes[1].direction[0] === 0
       ) {
-        this.snakes[1].direction = [-1, 0];
+        this.snakes[1].direction = Direction.left;
         //right
       } else if (
-        (e.keyCode === 68) &&
+        (e.keyCode === KeyCode.right) &&
         this.snakes[1].direction[0] === 0
       ) {
-        this.snakes[1].direction = [1, 0];
+        this.snakes[1].direction = Direction.right;
         //up
       } else if (
-        (e.keyCode === 87) &&
+        (e.keyCode === KeyCode.up) &&
         this.snakes[1].direction[1] === 0
       ) {
-        this.snakes[1].direction = [0, -1];
+        this.snakes[1].direction = Direction.up;
         //down
       } else if (
-        (e.keyCode === 83) &&
+        (e.keyCode === KeyCode.down) &&
         this.snakes[1].direction[1] === 0
       ) {
-        this.snakes[1].direction = [0, 1];
+        this.snakes[1].direction = Direction.down;
       }
     });
   }

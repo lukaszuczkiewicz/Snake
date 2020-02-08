@@ -1,15 +1,17 @@
 import { ctx } from "../mechanics/canvas.js";
 import { IDrawable } from "../interfaces/IDrawable.js";
+import { Color } from "../enums/color.js";
 
 export class Block implements IDrawable{
+  readonly size = 40;
   x: number;
   y: number;
-  size = 40;
-  color = 'white';
+  color: Color;
 
-  constructor(x: number, y: number) {
+  constructor(x: number, y: number, color: Color) {
     this.x = x;
     this.y = y;
+    this.color = color;
   }
 
   draw(): void {

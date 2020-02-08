@@ -1,15 +1,18 @@
 import { Queue } from '../data structures/queue.js';
 import { SnakePart } from './snakePart.js';
 import { gridWidth, gridHeight } from '../mechanics/canvas.js';
+import { Direction } from '../enums/direction.js';
+import { Color } from '../enums/color.js';
 export class Snake extends Queue {
-    constructor() {
+    constructor(color = Color.green) {
         super();
         this.score = 0;
         this.isEating = false;
-        this.enqueue(new SnakePart(8, 3));
-        this.enqueue(new SnakePart(8, 4));
-        this.enqueue(new SnakePart(8, 5));
-        this.changeDirection([0, 1]);
+        this.color = color;
+        this.enqueue(new SnakePart(8, 3, color));
+        this.enqueue(new SnakePart(8, 4, color));
+        this.enqueue(new SnakePart(8, 5, color));
+        this.changeDirection(Direction.up);
     }
     draw() {
         let current = this.first;
@@ -54,7 +57,7 @@ export class Snake extends Queue {
         return false;
     }
     move() {
-        this.enqueue(new SnakePart(this.last.value.x + this.direction[0], this.last.value.y + this.direction[1]));
+        this.enqueue(new SnakePart(this.last.value.x + this.direction[0], this.last.value.y + this.direction[1], this.color));
         if (!this.isEating) {
             this.dequeue();
         }
