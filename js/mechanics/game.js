@@ -6,20 +6,21 @@ let background;
 let snake;
 let apple;
 let score;
+let isPaused = false;
+const timeInterval = 100;
+let timeCounter = 0;
+let lastTime = 0;
 export function initGame() {
     background = new Background();
     background.draw();
     snake = new Snake();
     snake.draw();
     apple = new Apple(10, 10);
+    apple.createNewPosition(snake);
     apple.draw();
     score = new Score();
     score.draw(snake.score);
 }
-let isPaused = false;
-const timeInterval = 100;
-let timeCounter = 0;
-let lastTime = 0;
 export function mainLoop(time = 0) {
     const deltaTime = time - lastTime;
     lastTime = time;

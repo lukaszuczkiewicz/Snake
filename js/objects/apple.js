@@ -11,7 +11,7 @@ export class Apple extends Block {
         let current = snake.first;
         while (current.next !== null) {
             if (current.value.x === this.x && current.value.y === this.y) {
-                this.createNewPosition(snake); //create a new position to not allow new fruit appear under snake body
+                this.createNewPosition(snake); //create a new position to not allow a new fruit from appearing under snake's body
             }
             current = current.next;
         }
