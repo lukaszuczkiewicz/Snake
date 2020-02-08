@@ -1,5 +1,5 @@
 import { ctx } from "../mechanics/canvas.js";
-import { IDrawable } from "../IDrawable.js";
+import { IDrawable } from "../interfaces/IDrawable.js";
 
 export class Block implements IDrawable{
   x: number;

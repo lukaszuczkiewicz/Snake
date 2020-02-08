@@ -1,9 +1,10 @@
 import { Block } from "./block.js";
 import { gridWidth, gridHeight } from "../mechanics/canvas.js";
+import { Color } from "../enums/color.js";
 export class Apple extends Block {
     constructor() {
         super(...arguments);
-        this.color = 'red';
+        this.color = Color.red;
     }
     createNewPosition(snake) {
         this.x = Math.floor(Math.random() * gridWidth);

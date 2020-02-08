@@ -1,17 +1,18 @@
-import { Game } from "./mechanics/game.js";
+import { DOM } from "./DOM.js";
+import { IGame } from "./interfaces/IGame.js";
+import { SiglePlayerGame } from "./mechanics/singlePlayerGame.js";
+import { MultiPlayerGame } from "./mechanics/multiPlayerGame.js";
 
-const newGame1P = document.querySelector('#newGame1P');
-const newGame2P = document.querySelector('#newGame2P');
-const game = new Game();
+let game: IGame;
 
-newGame1P.addEventListener('click', ()=> {
+DOM.newGame1P.addEventListener('click', ()=> {
+  DOM.toggleMenu();
+  game = new SiglePlayerGame();
   game.initGame();
-  game.enableControls();
-  game.mainLoop();
 });
 
-newGame2P.addEventListener('click', ()=> {
-  // initGame();
-  // enableControls();
-  // mainLoop();
+DOM.newGame2P.addEventListener('click', ()=> {
+  DOM.toggleMenu();
+  game = new MultiPlayerGame();
+  game.initGame();
 });

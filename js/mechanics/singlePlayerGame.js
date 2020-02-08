@@ -1,9 +1,10 @@
 import { Background } from '../objects/background.js';
 import { Snake } from '../objects/snake.js';
 import { Apple } from '../objects/apple.js';
-import { Score } from '../score.js';
+import { Score } from '../objects/score.js';
 import { DOM } from '../DOM.js';
-export class Game {
+import { KeyCode } from '../enums/keyCode.js';
+export class SiglePlayerGame {
     constructor() {
         this.isPaused = false;
         this.timeInterval = 100;
@@ -54,22 +55,22 @@ export class Game {
             if (this.isPaused)
                 return;
             //left
-            if ((e.keyCode === 37 || e.keyCode === 65) &&
+            if ((e.keyCode === KeyCode.a || e.keyCode === KeyCode.left) &&
                 this.snake.direction[0] === 0) {
                 this.snake.direction = [-1, 0];
                 //right
             }
-            else if ((e.keyCode === 39 || e.keyCode === 68) &&
+            else if ((e.keyCode === KeyCode.d || e.keyCode === KeyCode.right) &&
                 this.snake.direction[0] === 0) {
                 this.snake.direction = [1, 0];
                 //up
             }
-            else if ((e.keyCode === 38 || e.keyCode === 87) &&
+            else if ((e.keyCode === KeyCode.w || e.keyCode === KeyCode.up) &&
                 this.snake.direction[1] === 0) {
                 this.snake.direction = [0, -1];
                 //down
             }
-            else if ((e.keyCode === 40 || e.keyCode === 83) &&
+            else if ((e.keyCode === KeyCode.s || e.keyCode === KeyCode.down) &&
                 this.snake.direction[1] === 0) {
                 this.snake.direction = [0, 1];
             }

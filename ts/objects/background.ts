@@ -1,5 +1,5 @@
 import { ctx, cvs } from "../mechanics/canvas.js";
-import { IDrawable } from "../IDrawable.js";
+import { IDrawable } from "../interfaces/IDrawable.js";
 
 export class Background implements IDrawable {
   color: string = 'black';

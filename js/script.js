@@ -1,14 +1,14 @@
-import { Game } from "./mechanics/game.js";
-const newGame1P = document.querySelector('#newGame1P');
-const newGame2P = document.querySelector('#newGame2P');
-const game = new Game();
-newGame1P.addEventListener('click', () => {
+import { DOM } from "./DOM.js";
+import { SiglePlayerGame } from "./mechanics/singlePlayerGame.js";
+import { MultiPlayerGame } from "./mechanics/multiPlayerGame.js";
+let game;
+DOM.newGame1P.addEventListener('click', () => {
+    DOM.toggleMenu();
+    game = new SiglePlayerGame();
     game.initGame();
-    game.enableControls();
-    game.mainLoop();
 });
-newGame2P.addEventListener('click', () => {
-    // initGame();
-    // enableControls();
-    // mainLoop();
+DOM.newGame2P.addEventListener('click', () => {
+    DOM.toggleMenu();
+    game = new MultiPlayerGame();
+    game.initGame();
 });

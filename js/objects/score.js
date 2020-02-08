@@ -1,7 +1,8 @@
 import { ctx } from "../mechanics/canvas.js";
+import { Color } from "../enums/color.js";
 export class Score {
     constructor() {
-        this.color = 'yellow';
+        this.color = Color.yellow;
     }
     draw(score) {
         ctx.font = `40px Calibri`;
