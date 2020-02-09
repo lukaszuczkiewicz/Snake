@@ -1,7 +1,6 @@
 import { Background } from '../objects/background.js';
 import { Snake } from '../objects/snake.js';
 import { Apple } from '../objects/apple.js';
-import { Score } from '../objects/score.js';
 import { DOM } from '../DOM.js';
 import { KeyCode } from '../enums/keyCode.js';
 import { Direction } from '../enums/direction.js';
@@ -24,7 +23,7 @@ export class MultiPlayerGame {
                 this.snakes.forEach(snake => snake.checkCollision());
                 this.snakes.forEach(snake => snake.checkEarningPoints(this.apple.x, this.apple.y) && this.apple.createNewPosition(snake));
                 this.snakes.forEach(snake => snake.draw());
-                this.score.draw(this.snakes[0].score);
+                this.snakes.forEach(snake => snake.score.draw());
             }
             requestAnimationFrame(this.mainLoop);
         };
@@ -33,12 +32,13 @@ export class MultiPlayerGame {
         this.background = new Background();
         this.background.draw();
         this.snakes = [new Snake(), new Snake(Color.orange)];
+        this.snakes[1].score.y = 100;
+        this.snakes[1].score.player = 2;
         this.snakes.forEach(snake => snake.draw());
         this.apple = new Apple(10, 10);
         this.apple.createNewPosition(this.snakes[0]);
         this.apple.draw();
-        this.score = new Score();
-        this.score.draw(this.snakes[0].score);
+        this.snakes.forEach(snake => snake.score.draw());
         this.enableControls();
         this.mainLoop();
     }

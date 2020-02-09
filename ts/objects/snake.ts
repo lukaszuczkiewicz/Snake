@@ -3,16 +3,18 @@ import { SnakePart } from './snakePart.js';
 import { gridWidth, gridHeight } from '../mechanics/canvas.js';
 import { Direction } from '../enums/direction.js';
 import { Color } from '../enums/color.js';
+import { Score } from './score.js';
 
 export class Snake extends Queue<SnakePart> {
   direction: Direction;
-  score: number = 0;
   isEating = false;
   color: Color;
+  score: Score;
 
   constructor(color = Color.green) {
     super();
     this.color = color;
+    this.score = new Score();
     this.enqueue(new SnakePart(8, 3, color));
     this.enqueue(new SnakePart(8, 4, color));
     this.enqueue(new SnakePart(8, 5, color));
@@ -47,7 +49,7 @@ export class Snake extends Queue<SnakePart> {
       if (current.value.x === this.last.value.x && current.value.y === this.last.value.y) {
         //gameOver
         this.reset();
-        this.score = 0;
+        this.score.reset();
         return;
       }
       current = current.next;
@@ -58,7 +60,7 @@ export class Snake extends Queue<SnakePart> {
     if (this.last.value.x === appleX && this.last.value.y === appleY) {
       // extend body
       this.isEating = true;
-      this.score++;
+      this.score.increase();
       return true;
     }
     return false;

@@ -1,7 +1,6 @@
 import { Background } from '../objects/background.js';
 import { Snake } from '../objects/snake.js';
 import { Apple } from '../objects/apple.js';
-import { Score } from '../objects/score.js';
 import { DOM } from '../DOM.js';
 import { IGame } from '../interfaces/IGame.js';
 import { KeyCode } from '../enums/keyCode.js';
@@ -11,7 +10,6 @@ export class SiglePlayerGame implements IGame {
   private background: Background;
   private snake: Snake;
   private apple: Apple;
-  private score: Score;
 
   private isPaused = false;
   private readonly timeInterval = 100;
@@ -26,8 +24,7 @@ export class SiglePlayerGame implements IGame {
     this.apple = new Apple(10, 10);
     this.apple.createNewPosition(this.snake);
     this.apple.draw();
-    this.score = new Score();
-    this.score.draw(this.snake.score);
+    this.snake.score.draw();
 
     this.enableControls();
     this.mainLoop();
@@ -49,7 +46,7 @@ export class SiglePlayerGame implements IGame {
       this.snake.checkEarningPoints(this.apple.x, this.apple.y) &&
       this.apple.createNewPosition(this.snake);
       this.snake.draw();
-      this.score.draw(this.snake.score);
+      this.snake.score.draw();
     }
     requestAnimationFrame(this.mainLoop);
   };

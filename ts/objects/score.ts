@@ -3,11 +3,24 @@ import { ctx } from "../mechanics/canvas.js";
 import { Color } from "../enums/color.js";
 
 export class Score implements IDrawable {
+  points: number = 0;
+  player: number = 1;
   color: string = Color.yellow;
-  draw(score: number): void {
+  x: number = 10;
+  y: number = 40;
+
+  draw(): void {
     ctx.font = `40px Calibri`;
     ctx.textAlign = "left";
     ctx.fillStyle = this.color;
-    ctx.fillText(`Score: ${score}`, 40, 40);
+    ctx.fillText(`Player ${this.player} - score: ${this.points}`, this.x, this.y);
+  }
+
+  increase() {
+    this.points++;
+  }
+
+  reset() {
+    this. points = 0;
   }
 }

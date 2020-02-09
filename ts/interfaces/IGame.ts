@@ -1,5 +1,6 @@
 export interface IGame {
   initGame(): void;
-  mainLoop();
+  mainLoop(): void;
   enableControls(): void;
+  onDestroy(): void;
 }
