@@ -5,15 +5,15 @@ import { Direction } from '../enums/direction.js';
 import { Color } from '../enums/color.js';
 import { Score } from './score.js';
 export class Snake extends Queue {
-    constructor(color = Color.green) {
+    constructor(direction = Direction.up, x = 8, y = 5, color = Color.green) {
         super();
         this.isEating = false;
         this.color = color;
         this.score = new Score();
-        this.enqueue(new SnakePart(8, 3, color));
-        this.enqueue(new SnakePart(8, 4, color));
-        this.enqueue(new SnakePart(8, 5, color));
-        this.changeDirection(Direction.up);
+        for (let i = 0; i < 3; i++) {
+            this.enqueue(new SnakePart(x, y + i, color));
+        }
+        this.changeDirection(direction);
     }
     draw() {
         let current = this.first;

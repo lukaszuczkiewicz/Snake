@@ -19,7 +19,7 @@ export class MultiPlayerGame implements IGame {
   public initGame() {
     this.background = new Background();
     this.background.draw();
-    this.snakes = [new Snake(), new Snake(Color.orange)];
+    this.snakes = [new Snake(), new Snake(Direction.up, 23, 5, Color.orange)];
     this.snakes[1].score.y = 100;
     this.snakes[1].score.player = 2;
     this.snakes.forEach(snake => snake.draw());

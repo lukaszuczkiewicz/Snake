@@ -11,14 +11,19 @@ export class Snake extends Queue<SnakePart> {
   color: Color;
   score: Score;
 
-  constructor(color = Color.green) {
+  constructor(
+    direction: Direction = Direction.up,
+    x: number = 8,
+    y: number = 5,
+    color = Color.green) {
     super();
     this.color = color;
     this.score = new Score();
-    this.enqueue(new SnakePart(8, 3, color));
-    this.enqueue(new SnakePart(8, 4, color));
-    this.enqueue(new SnakePart(8, 5, color));
-    this.changeDirection(Direction.up);
+
+    for (let i = 0; i < 3; i++) {
+      this.enqueue(new SnakePart(x, y + i, color));
+    }
+    this.changeDirection(direction);
   }
 
   draw(): void {
