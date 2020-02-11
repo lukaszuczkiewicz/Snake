@@ -4,6 +4,7 @@ import { gridWidth, gridHeight } from '../mechanics/canvas.js';
 import { Direction } from '../enums/direction.js';
 import { Color } from '../enums/color.js';
 import { Score } from './score.js';
+import { Record } from './record.js';
 
 export class Snake extends Queue<SnakePart> {
   direction: Direction;
@@ -54,6 +55,7 @@ export class Snake extends Queue<SnakePart> {
       if (current.value.x === this.last.value.x && current.value.y === this.last.value.y) {
         //gameOver
         this.reset();
+        Record.save(this.score.points);
         this.score.reset();
         return;
       }

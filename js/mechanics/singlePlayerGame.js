@@ -10,6 +10,7 @@ export class SiglePlayerGame {
         this.timeInterval = 100;
         this.timeCounter = 0;
         this.lastTime = 0;
+        this.isAnimated = false;
         this.mainLoop = (time = 0) => {
             const deltaTime = time - this.lastTime;
             this.lastTime = time;
@@ -25,7 +26,8 @@ export class SiglePlayerGame {
                 this.snake.draw();
                 this.snake.score.draw();
             }
-            requestAnimationFrame(this.mainLoop);
+            if (this.isAnimated)
+                requestAnimationFrame(this.mainLoop);
         };
     }
     initGame() {
@@ -38,16 +40,17 @@ export class SiglePlayerGame {
         this.apple.draw();
         this.snake.score.draw();
         this.enableControls();
+        this.isAnimated = true;
         this.mainLoop();
     }
-    onDestroy() {
-        this.mainLoop = null;
+    destroy() {
+        this.isAnimated = null;
     }
     enableControls() {
         document.addEventListener('keydown', e => {
             if (e.keyCode === KeyCode.space) {
-                DOM.toggleMenu();
                 this.isPaused = !this.isPaused;
+                this.isPaused ? DOM.showMenu() : DOM.hideMenu();
             }
             if (this.isPaused)
                 return;

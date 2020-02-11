@@ -11,6 +11,7 @@ export class MultiPlayerGame {
         this.timeInterval = 100;
         this.timeCounter = 0;
         this.lastTime = 0;
+        this.isAnimated = false;
         this.mainLoop = (time = 0) => {
             const deltaTime = time - this.lastTime;
             this.lastTime = time;
@@ -25,7 +26,8 @@ export class MultiPlayerGame {
                 this.snakes.forEach(snake => snake.draw());
                 this.snakes.forEach(snake => snake.score.draw());
             }
-            requestAnimationFrame(this.mainLoop);
+            if (this.isAnimated)
+                requestAnimationFrame(this.mainLoop);
         };
     }
     initGame() {
@@ -40,18 +42,19 @@ export class MultiPlayerGame {
         this.apple.draw();
         this.snakes.forEach(snake => snake.score.draw());
         this.enableControls();
+        this.isAnimated = true;
         this.mainLoop();
     }
-    onDestroy() {
-        this.mainLoop = null;
+    destroy() {
+        this.isAnimated = false;
     }
     enableControls() {
         //controls
         document.addEventListener('keydown', e => {
             if (e.keyCode === KeyCode.space) {
                 //spacebar
-                DOM.toggleMenu();
                 this.isPaused = !this.isPaused;
+                this.isPaused ? DOM.showMenu() : DOM.hideMenu();
             }
             if (this.isPaused)
                 return;

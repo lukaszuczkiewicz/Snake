@@ -15,6 +15,7 @@ export class SiglePlayerGame implements IGame {
   private readonly timeInterval = 100;
   private timeCounter = 0;
   private lastTime = 0;   
+  private isAnimated = false;
 
   public initGame() {
     this.background = new Background();
@@ -27,6 +28,7 @@ export class SiglePlayerGame implements IGame {
     this.snake.score.draw();
 
     this.enableControls();
+    this.isAnimated = true;
     this.mainLoop();
   }
 
@@ -48,17 +50,17 @@ export class SiglePlayerGame implements IGame {
       this.snake.draw();
       this.snake.score.draw();
     }
-    requestAnimationFrame(this.mainLoop);
+    if (this.isAnimated) requestAnimationFrame(this.mainLoop);
   };
 
-  public onDestroy() {
-    this.mainLoop = null;
+  public destroy() {
+    this.isAnimated = null;
   }
   enableControls() {
     document.addEventListener('keydown', e => {
       if (e.keyCode === KeyCode.space) {
-        DOM.toggleMenu();
         this.isPaused = !this.isPaused;
+        this.isPaused ?  DOM.showMenu() : DOM.hideMenu();
       }
       if (this.isPaused) return;
 

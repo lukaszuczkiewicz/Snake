@@ -15,6 +15,7 @@ export class MultiPlayerGame implements IGame {
   private readonly timeInterval = 100;
   private timeCounter = 0;
   private lastTime = 0;   
+  private isAnimated = false;
 
   public initGame() {
     this.background = new Background();
@@ -29,6 +30,7 @@ export class MultiPlayerGame implements IGame {
     this.snakes.forEach(snake => snake.score.draw());      
 
     this.enableControls();
+    this.isAnimated = true;
     this.mainLoop();
   }
 
@@ -50,19 +52,19 @@ export class MultiPlayerGame implements IGame {
       this.snakes.forEach(snake => snake.draw());
       this.snakes.forEach(snake => snake.score.draw());      
     }
-    requestAnimationFrame(this.mainLoop);
+    if (this.isAnimated) requestAnimationFrame(this.mainLoop);
   };
 
-  public onDestroy() {
-    this.mainLoop = null;
+  public destroy() {
+    this.isAnimated = false;
   }
   enableControls() {
     //controls
     document.addEventListener('keydown', e => {
       if (e.keyCode === KeyCode.space) {
         //spacebar
-        DOM.toggleMenu();
         this.isPaused = !this.isPaused;
+        this.isPaused ?  DOM.showMenu() : DOM.hideMenu();
       }
       if (this.isPaused) return;
 
