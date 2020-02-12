@@ -45,10 +45,9 @@ export class MultiPlayerGame implements IGame {
       this.background.draw();
       this.apple.draw();
       this.snakes.forEach(snake => snake.move());
-      this.snakes.forEach(snake => snake.checkCollision());
-      
+      this.snakes.forEach(snake => snake.checkCollision());     
       this.snakes.forEach(snake => snake.checkEarningPoints(this.apple.x, this.apple.y) && this.apple.createNewPosition(snake));
-
+      this.checkIfWin();
       this.snakes.forEach(snake => snake.draw());
       this.snakes.forEach(snake => snake.score.draw());      
     }
@@ -56,70 +55,81 @@ export class MultiPlayerGame implements IGame {
   };
 
   public destroy() {
+    this.isPaused = true;
     this.isAnimated = false;
   }
+
+  checkIfWin() {
+    if (this.snakes[0].checkIfWin() || this.snakes[1].checkIfWin()) {
+      this.destroy();
+      DOM.showCongrats();
+      DOM.showMenu();
+    }
+  }
+
   enableControls() {
-    //controls
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === KeyCode.space) {
-        //spacebar
-        this.isPaused = !this.isPaused;
-        this.isPaused ?  DOM.showMenu() : DOM.hideMenu();
-      }
-      if (this.isPaused) return;
+    document.addEventListener('keydown', this.reactToKeys.bind(this));
+  }
 
-      //PLAYER 1
-      //left
-      if (
-        (e.keyCode === KeyCode.a) &&
-        this.snakes[0].direction[0] === 0
-      ) {
-        this.snakes[0].direction = Direction.left;
-        //right
-      } else if (
-        (e.keyCode === KeyCode.d) &&
-        this.snakes[0].direction[0] === 0
-      ) {
-        this.snakes[0].direction = Direction.right;
-        //up
-      } else if (
-        (e.keyCode === KeyCode.w) &&
-        this.snakes[0].direction[1] === 0
-      ) {
-        this.snakes[0].direction = Direction.up;
-        //down
-      } else if (
-        (e.keyCode === KeyCode.s) &&
-        this.snakes[0].direction[1] === 0
-      ) {
-        this.snakes[0].direction = Direction.down;
-      }
+  reactToKeys(e: KeyboardEvent): void {
+    if (!this.isAnimated) return;
+    if (e.keyCode === KeyCode.space) {
+      this.isPaused = !this.isPaused;
+      this.isPaused ?  DOM.showMenu() : DOM.hideMenu();
+    }
+    if (this.isPaused) return;
 
-      //PLAYER 2
-      if (
-        (e.keyCode === KeyCode.left) &&
-        this.snakes[1].direction[0] === 0
-      ) {
-        this.snakes[1].direction = Direction.left;
-        //right
-      } else if (
-        (e.keyCode === KeyCode.right) &&
-        this.snakes[1].direction[0] === 0
-      ) {
-        this.snakes[1].direction = Direction.right;
-        //up
-      } else if (
-        (e.keyCode === KeyCode.up) &&
-        this.snakes[1].direction[1] === 0
-      ) {
-        this.snakes[1].direction = Direction.up;
-        //down
-      } else if (
-        (e.keyCode === KeyCode.down) &&
-        this.snakes[1].direction[1] === 0
-      ) {
-        this.snakes[1].direction = Direction.down;
-      }
-    });
+    //PLAYER 1
+    //left
+    if (
+      (e.keyCode === KeyCode.a) &&
+      this.snakes[0].direction[0] === 0
+    ) {
+      this.snakes[0].direction = Direction.left;
+      //right
+    } else if (
+      (e.keyCode === KeyCode.d) &&
+      this.snakes[0].direction[0] === 0
+    ) {
+      this.snakes[0].direction = Direction.right;
+      //up
+    } else if (
+      (e.keyCode === KeyCode.w) &&
+      this.snakes[0].direction[1] === 0
+    ) {
+      this.snakes[0].direction = Direction.up;
+      //down
+    } else if (
+      (e.keyCode === KeyCode.s) &&
+      this.snakes[0].direction[1] === 0
+    ) {
+      this.snakes[0].direction = Direction.down;
+    }
+
+    //PLAYER 2
+    if (
+      (e.keyCode === KeyCode.left) &&
+      this.snakes[1].direction[0] === 0
+    ) {
+      this.snakes[1].direction = Direction.left;
+      //right
+    } else if (
+      (e.keyCode === KeyCode.right) &&
+      this.snakes[1].direction[0] === 0
+    ) {
+      this.snakes[1].direction = Direction.right;
+      //up
+    } else if (
+      (e.keyCode === KeyCode.up) &&
+      this.snakes[1].direction[1] === 0
+    ) {
+      this.snakes[1].direction = Direction.up;
+      //down
+    } else if (
+      (e.keyCode === KeyCode.down) &&
+      this.snakes[1].direction[1] === 0
+    ) {
+      this.snakes[1].direction = Direction.down;
+    }
   }
 }

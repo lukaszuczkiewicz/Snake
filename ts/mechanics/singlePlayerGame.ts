@@ -14,7 +14,7 @@ export class SiglePlayerGame implements IGame {
   private isPaused = false;
   private readonly timeInterval = 100;
   private timeCounter = 0;
-  private lastTime = 0;   
+  private lastTime = 0;
   private isAnimated = false;
 
   public initGame() {
@@ -44,47 +44,59 @@ export class SiglePlayerGame implements IGame {
       this.apple.draw();
       this.snake.move();
       this.snake.checkCollision();
-
-      this.snake.checkEarningPoints(this.apple.x, this.apple.y) &&
-      this.apple.createNewPosition(this.snake);
+      this.snake.checkEarningPoints(this.apple.x, this.apple.y) && this.apple.createNewPosition(this.snake);
+      this.checkIfWin();
       this.snake.draw();
       this.snake.score.draw();
     }
     if (this.isAnimated) requestAnimationFrame(this.mainLoop);
   };
 
-  public destroy() {
-    this.isAnimated = null;
+  checkIfWin() {
+    if (this.snake.checkIfWin()) {
+      this.destroy();
+      DOM.showCongrats();
+      DOM.showMenu();
+    }
   }
-  enableControls() {
-    document.addEventListener('keydown', e => {
-      if (e.keyCode === KeyCode.space) {
-        this.isPaused = !this.isPaused;
-        this.isPaused ?  DOM.showMenu() : DOM.hideMenu();
-      }
-      if (this.isPaused) return;
 
-      if (
-        (e.keyCode === KeyCode.a || e.keyCode === KeyCode.left) &&
-        this.snake.direction[0] === 0
-      ) {
-        this.snake.direction = Direction.left;
-      } else if (
-        (e.keyCode === KeyCode.d || e.keyCode === KeyCode.right) &&
-        this.snake.direction[0] === 0
-      ) {
-        this.snake.direction = Direction.right;
-      } else if (
-        (e.keyCode === KeyCode.w || e.keyCode === KeyCode.up) &&
-        this.snake.direction[1] === 0
-      ) {
-        this.snake.direction = Direction.up;
-      } else if (
-        (e.keyCode === KeyCode.s || e.keyCode === KeyCode.down) &&
-        this.snake.direction[1] === 0
-      ) {
-        this.snake.direction = Direction.down;
-      }
-    });
+  public destroy() {
+    this.isPaused = true;
+    this.isAnimated = false;
+  }
+
+  enableControls() {
+    document.addEventListener('keydown', this.reactToKeys.bind(this));
+  }
+
+  reactToKeys(e: KeyboardEvent) {
+    if (!this.isAnimated) return;
+    if (e.keyCode === KeyCode.space) {
+      this.isPaused = !this.isPaused;
+      this.isPaused ? DOM.showMenu() : DOM.hideMenu();
+    }
+    if (this.isPaused) return;
+
+    if (
+      (e.keyCode === KeyCode.a || e.keyCode === KeyCode.left) &&
+      this.snake.direction[0] === 0
+    ) {
+      this.snake.direction = Direction.left;
+    } else if (
+      (e.keyCode === KeyCode.d || e.keyCode === KeyCode.right) &&
+      this.snake.direction[0] === 0
+    ) {
+      this.snake.direction = Direction.right;
+    } else if (
+      (e.keyCode === KeyCode.w || e.keyCode === KeyCode.up) &&
+      this.snake.direction[1] === 0
+    ) {
+      this.snake.direction = Direction.up;
+    } else if (
+      (e.keyCode === KeyCode.s || e.keyCode === KeyCode.down) &&
+      this.snake.direction[1] === 0
+    ) {
+      this.snake.direction = Direction.down;
+    }
   }
 }

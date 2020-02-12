@@ -11,19 +11,19 @@
   <header>Snake Game</header>
   <div class="game-container">
     <div class="menu" id="menu">
+      <div class="congrats hide" id="congrats">
+        <h2>Congrats! You win!</h2>
+      </div>
       <div class="buttons">
         <button id="newGame1P">NEW GAME - 1 PLAYER</button>
         <button id="newGame2P">NEW GAME - 2 PLAYERS</button>
-      </div>
-      <div>
-        <span>Record</span>
-        <span id="record">---</span>
       </div>
     </div>
     <canvas id="canvas" width="1280" height="720"></canvas>
   </div>
   <div class="controls">
-    W,S,A,D - move, SPACEBAR - pause
+    <p>W,S,A,D - move, SPACEBAR - pause/menu</p>
+    <p>Get 20 points to win</p>
   </div>
 </body>
 <script type="module" src="js/script.js"></script>

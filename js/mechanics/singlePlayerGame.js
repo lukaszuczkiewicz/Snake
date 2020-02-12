@@ -21,8 +21,8 @@ export class SiglePlayerGame {
                 this.apple.draw();
                 this.snake.move();
                 this.snake.checkCollision();
-                this.snake.checkEarningPoints(this.apple.x, this.apple.y) &&
-                    this.apple.createNewPosition(this.snake);
+                this.snake.checkEarningPoints(this.apple.x, this.apple.y) && this.apple.createNewPosition(this.snake);
+                this.checkIfWin();
                 this.snake.draw();
                 this.snake.score.draw();
             }
@@ -43,33 +43,44 @@ export class SiglePlayerGame {
         this.isAnimated = true;
         this.mainLoop();
     }
+    checkIfWin() {
+        if (this.snake.checkIfWin()) {
+            this.destroy();
+            DOM.showCongrats();
+            DOM.showMenu();
+        }
+    }
     destroy() {
-        this.isAnimated = null;
+        this.isPaused = true;
+        this.isAnimated = false;
     }
     enableControls() {
-        document.addEventListener('keydown', e => {
-            if (e.keyCode === KeyCode.space) {
-                this.isPaused = !this.isPaused;
-                this.isPaused ? DOM.showMenu() : DOM.hideMenu();
-            }
-            if (this.isPaused)
-                return;
-            if ((e.keyCode === KeyCode.a || e.keyCode === KeyCode.left) &&
-                this.snake.direction[0] === 0) {
-                this.snake.direction = Direction.left;
-            }
-            else if ((e.keyCode === KeyCode.d || e.keyCode === KeyCode.right) &&
-                this.snake.direction[0] === 0) {
-                this.snake.direction = Direction.right;
-            }
-            else if ((e.keyCode === KeyCode.w || e.keyCode === KeyCode.up) &&
-                this.snake.direction[1] === 0) {
-                this.snake.direction = Direction.up;
-            }
-            else if ((e.keyCode === KeyCode.s || e.keyCode === KeyCode.down) &&
-                this.snake.direction[1] === 0) {
-                this.snake.direction = Direction.down;
-            }
-        });
+        document.addEventListener('keydown', this.reactToKeys.bind(this));
+    }
+    reactToKeys(e) {
+        if (!this.isAnimated)
+            return;
+        if (e.keyCode === KeyCode.space) {
+            this.isPaused = !this.isPaused;
+            this.isPaused ? DOM.showMenu() : DOM.hideMenu();
+        }
+        if (this.isPaused)
+            return;
+        if ((e.keyCode === KeyCode.a || e.keyCode === KeyCode.left) &&
+            this.snake.direction[0] === 0) {
+            this.snake.direction = Direction.left;
+        }
+        else if ((e.keyCode === KeyCode.d || e.keyCode === KeyCode.right) &&
+            this.snake.direction[0] === 0) {
+            this.snake.direction = Direction.right;
+        }
+        else if ((e.keyCode === KeyCode.w || e.keyCode === KeyCode.up) &&
+            this.snake.direction[1] === 0) {
+            this.snake.direction = Direction.up;
+        }
+        else if ((e.keyCode === KeyCode.s || e.keyCode === KeyCode.down) &&
+            this.snake.direction[1] === 0) {
+            this.snake.direction = Direction.down;
+        }
     }
 }
