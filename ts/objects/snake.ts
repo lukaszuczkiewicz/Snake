@@ -4,8 +4,9 @@ import { gridWidth, gridHeight } from '../mechanics/canvas.js';
 import { Direction } from '../enums/direction.js';
 import { Color } from '../enums/color.js';
 import { Score } from './score.js';
+import { IDrawable } from '../interfaces/IDrawable.js';
 
-export class Snake extends Queue<SnakePart> {
+export class Snake extends Queue<SnakePart> implements IDrawable {
   direction: Direction;
   isEating = false;
   color: Color;
