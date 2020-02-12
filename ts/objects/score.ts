@@ -16,11 +16,11 @@ export class Score implements IDrawable {
     ctx.fillText(`Player ${this.player} - score: ${this.points}`, this.x, this.y);
   }
 
-  increase() {
+  increase(): void {
     this.points++;
   }
 
-  reset() {
-    this. points = 0;
+  reset(): void {
+    this.points = 0;
   }
 }

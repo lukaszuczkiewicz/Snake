@@ -1,4 +1,4 @@
-import { DOM } from "./DOM.js";
+import { DOM } from "./objects/DOM.js";
 import { IGame } from "./interfaces/IGame.js";
 import { SiglePlayerGame } from "./mechanics/singlePlayerGame.js";
 import { MultiPlayerGame } from "./mechanics/multiPlayerGame.js";

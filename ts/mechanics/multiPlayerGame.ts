@@ -1,7 +1,7 @@
 import { Background } from '../objects/background.js';
 import { Snake } from '../objects/snake.js';
 import { Apple } from '../objects/apple.js';
-import { DOM } from '../DOM.js';
+import { DOM } from '../objects/DOM.js';
 import { IGame } from '../interfaces/IGame.js';
 import { KeyCode } from '../enums/keyCode.js';
 import { Direction } from '../enums/direction.js';
@@ -59,7 +59,7 @@ export class MultiPlayerGame implements IGame {
     if (this.isAnimated) requestAnimationFrame(this.mainLoop);
   };
 
-  public destroy() {
+  destroy() {
     this.isPaused = true;
     this.isAnimated = false;
   }

@@ -4,4 +4,5 @@ export interface IGame {
   enableControls(): void;
   reactToKeys(e: KeyboardEvent): void;
   destroy(): void;
+  checkIfWin(): void;
 }

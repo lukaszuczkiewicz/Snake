@@ -35,7 +35,7 @@ export class Snake extends Queue<SnakePart> {
     }
   }
 
-  checkCollision() {
+  checkCollision(): void {
     //with borders
     if (this.last.value.x < 0) {
       this.last.value.x = gridWidth - 1;
@@ -71,10 +71,10 @@ export class Snake extends Queue<SnakePart> {
   }
 
   checkIfWin(): boolean {
-    return (this.score.points >= 10);
+    return (this.score.points >= 20);
   }
 
-  move() {
+  move(): void {
     this.enqueue(
       new SnakePart(
         this.last.value.x + this.direction[0],
@@ -88,11 +88,11 @@ export class Snake extends Queue<SnakePart> {
     this.isEating = false;
   }
 
-  changeDirection(direction: Direction) {
+  changeDirection(direction: Direction): void {
     this.direction = direction;
   }
 
-  reset() {
+  reset(): void {
     let current = this.first;
     while (current.next.next.next !== null) {
       this.dequeue();

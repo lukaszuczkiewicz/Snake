@@ -57,7 +57,7 @@ export class Snake extends Queue {
         return false;
     }
     checkIfWin() {
-        return (this.score.points >= 10);
+        return (this.score.points >= 20);
     }
     move() {
         this.enqueue(new SnakePart(this.last.value.x + this.direction[0], this.last.value.y + this.direction[1], this.color));
