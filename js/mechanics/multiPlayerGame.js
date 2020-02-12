@@ -24,9 +24,9 @@ export class MultiPlayerGame {
                 this.snakes.forEach(snake => snake.move());
                 this.snakes.forEach(snake => snake.checkCollision());
                 this.snakes.forEach(snake => snake.checkEarningPoints(this.apple.x, this.apple.y) && this.apple.createNewPosition(snake));
-                let collidedSnakes = CollisionDetector.isTwoSnakesCollision(this.snakes);
-                if (collidedSnakes.length > 0) {
-                    collidedSnakes.forEach(id => this.snakes[id].reset());
+                let collidedSnakesIds = CollisionDetector.getCollidedSnakesIds(this.snakes);
+                if (collidedSnakesIds.length > 0) {
+                    collidedSnakesIds.forEach(id => this.snakes[id].reset());
                 }
                 this.checkIfWin();
                 this.snakes.forEach(snake => snake.draw());

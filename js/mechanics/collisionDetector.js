@@ -1,5 +1,5 @@
 export class CollisionDetector {
-    static isTwoSnakesCollision(snakes) {
+    static getCollidedSnakesIds(snakes) {
         const snake1 = snakes[0];
         const snake2 = snakes[1];
         const head1 = snake1.last;

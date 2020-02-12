@@ -1,7 +1,7 @@
 import { Snake } from "../objects/snake";
 
 export class CollisionDetector {
-  static isTwoSnakesCollision(snakes: Snake[]): number[] {
+  static getCollidedSnakesIds(snakes: Snake[]): number[] {
     const snake1 = snakes[0];
     const snake2 = snakes[1];
     const head1 = snake1.last;
