@@ -5,6 +5,7 @@ import { DOM } from '../DOM.js';
 import { KeyCode } from '../enums/keyCode.js';
 import { Direction } from '../enums/direction.js';
 import { Color } from '../enums/color.js';
+import { CollisionDetector } from './collisionDetector.js';
 export class MultiPlayerGame {
     constructor() {
         this.isPaused = false;
@@ -23,6 +24,10 @@ export class MultiPlayerGame {
                 this.snakes.forEach(snake => snake.move());
                 this.snakes.forEach(snake => snake.checkCollision());
                 this.snakes.forEach(snake => snake.checkEarningPoints(this.apple.x, this.apple.y) && this.apple.createNewPosition(snake));
+                let collidedSnakes = CollisionDetector.isTwoSnakesCollision(this.snakes);
+                if (collidedSnakes.length > 0) {
+                    collidedSnakes.forEach(id => this.snakes[id].reset());
+                }
                 this.checkIfWin();
                 this.snakes.forEach(snake => snake.draw());
                 this.snakes.forEach(snake => snake.score.draw());

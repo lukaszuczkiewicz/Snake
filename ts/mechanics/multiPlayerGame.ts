@@ -6,6 +6,7 @@ import { IGame } from '../interfaces/IGame.js';
 import { KeyCode } from '../enums/keyCode.js';
 import { Direction } from '../enums/direction.js';
 import { Color } from '../enums/color.js';
+import { CollisionDetector } from './collisionDetector.js';
 
 export class MultiPlayerGame implements IGame {
   private background: Background;
@@ -47,6 +48,10 @@ export class MultiPlayerGame implements IGame {
       this.snakes.forEach(snake => snake.move());
       this.snakes.forEach(snake => snake.checkCollision());     
       this.snakes.forEach(snake => snake.checkEarningPoints(this.apple.x, this.apple.y) && this.apple.createNewPosition(snake));
+      let collidedSnakes: number[] = CollisionDetector.isTwoSnakesCollision(this.snakes);
+      if (collidedSnakes.length > 0) {
+        collidedSnakes.forEach(id => this.snakes[id].reset());
+      }
       this.checkIfWin();
       this.snakes.forEach(snake => snake.draw());
       this.snakes.forEach(snake => snake.score.draw());      

@@ -42,7 +42,6 @@ export class Snake extends Queue {
             if (current.value.x === this.last.value.x && current.value.y === this.last.value.y) {
                 //gameOver
                 this.reset();
-                this.score.reset();
                 return;
             }
             current = current.next;
@@ -58,7 +57,7 @@ export class Snake extends Queue {
         return false;
     }
     checkIfWin() {
-        return (this.score.points >= 3);
+        return (this.score.points >= 10);
     }
     move() {
         this.enqueue(new SnakePart(this.last.value.x + this.direction[0], this.last.value.y + this.direction[1], this.color));
@@ -76,5 +75,6 @@ export class Snake extends Queue {
             this.dequeue();
             current = current.next;
         }
+        this.score.reset();
     }
 }

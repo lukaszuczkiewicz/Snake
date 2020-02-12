@@ -4,7 +4,6 @@ import { gridWidth, gridHeight } from '../mechanics/canvas.js';
 import { Direction } from '../enums/direction.js';
 import { Color } from '../enums/color.js';
 import { Score } from './score.js';
-import { DOM } from '../DOM.js';
 
 export class Snake extends Queue<SnakePart> {
   direction: Direction;
@@ -55,7 +54,6 @@ export class Snake extends Queue<SnakePart> {
       if (current.value.x === this.last.value.x && current.value.y === this.last.value.y) {
         //gameOver
         this.reset();
-        this.score.reset();
         return;
       }
       current = current.next;
@@ -73,7 +71,7 @@ export class Snake extends Queue<SnakePart> {
   }
 
   checkIfWin(): boolean {
-    return (this.score.points >= 3);
+    return (this.score.points >= 10);
   }
 
   move() {
@@ -100,5 +98,6 @@ export class Snake extends Queue<SnakePart> {
       this.dequeue();
       current = current.next;
     }
+    this.score.reset();
   }
 }
